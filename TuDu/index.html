@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<title>Vue demo</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1"/>
+<link href="styles/index.css" rel="stylesheet"/>
+
+</head>
+<body>
+
+<div id="card">
+  <header>{{title}}</header>
+  <div>
+    <input id="itemForm" v-on:keypress.enter="addItem" />
+    <button v-on:click="addItem">Add</button>  
+  </div>
+  
+  
+  <ul>
+    <li v-for="(item,index) in items">
+      <button v-on:click="deleteItem(index)">X</button>
+      {{ item.text }} 
+         
+    </li>  
+  </ul>
+   
+</div>
+<!--vue js cdn -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.1/vue.js"></script>
+<script>
+  var card = new Vue({
+  el: "#card",
+  data: {
+    title: "Never forget things TuDu",
+    items: [
+      { text: "",link:""},
+          
+    ]  
+  },
+  methods: {
+    addItem: function () {  
+      var input = document.getElementById('itemForm');
+      
+      if (input.value !== '') {
+      	this.items.push({
+           text: input.value      	
+      	})
+      	input.value = "";
+                              }
+  
+  },//endof addItem f/unc
+  
+  deleteItem: function(index){
+    	
+      this.items.splice(index,1);  
+        
+    }//endof cancelItem f/unc
+  
+          }//endof methods
+  
+
+});
+</script>
+</body>
+</html>
